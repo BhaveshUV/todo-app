@@ -69,6 +69,7 @@ body {
 
 #items ul .item .del {
     padding-right: 0.5rem;
+    display: none;
 }
 
 

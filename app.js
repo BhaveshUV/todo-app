@@ -26,3 +26,31 @@ document.addEventListener("keypress", function (eve) {
         addItem();
     }
 });
+
+// mouseover and mouseout on delete button's common ancestor
+let list = document.querySelector("#items ul");
+list.addEventListener("mouseover", function(event){
+    if(event.target.className == "item"){
+        event.target.children[1].style.display = "inline";
+    }
+    else if(event.target.className == "del"){
+        event.target.style.display = "inline";
+    }
+    else if(event.target.tagName == "BUTTON"){
+        event.target.parentElement.style.display = "inline";
+    }
+});
+list.addEventListener("mouseout", function(event){
+    if(event.target.className == "item"){
+        event.target.children[1].style.display = "none";
+    }
+    else if(event.target.className == "del" && event.toElement.id == "items"){
+        event.target.style.display = "none";
+    }
+    else if(event.target.className == "del"){
+        event.target.style.display = "inline";
+    }
+    else if(event.target.tagName == "BUTTON"){
+        event.target.parentElement.style.display = "inline";
+    }
+});
