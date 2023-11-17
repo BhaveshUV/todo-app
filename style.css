@@ -84,3 +84,30 @@ body {
     list-style: none;
     padding: 0.4rem 1rem;
 }
+
+/* add-item section */
+#add-item {
+    padding: 1rem;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: rgba(13, 54, 104, 0.259);
+    border-radius: 0 0 1rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+#add-item button {
+    background-color: rgb(59, 120, 59);
+    color: white;
+    border-radius: 0.2rem;
+    font: inherit;
+}
+
+#add-item input {
+    border: none;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+    font: inherit;
+    flex-grow: 1;
+    height: 1.25rem;
+}
