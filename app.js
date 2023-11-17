@@ -54,3 +54,10 @@ list.addEventListener("mouseout", function(event){
         event.target.parentElement.style.display = "inline";
     }
 });
+
+// Delete button functionality
+list.addEventListener("click", function(e) {
+    if(e.target.tagName == "BUTTON"){
+        e.target.parentElement.parentElement.remove();
+    }
+});
