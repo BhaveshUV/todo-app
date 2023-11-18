@@ -1,6 +1,6 @@
 let btn = document.querySelector("#add");
+let newItem = document.querySelector("#new-item");
 function addItem() {
-    let newItem = document.querySelector("#new-item");
     if (newItem.value != 0) {
         let li = document.createElement("li");
         li.classList.add("item");
@@ -50,5 +50,28 @@ list.addEventListener("mouseout", function(event){
 list.addEventListener("click", function(e) {
     if(e.target.tagName == "BUTTON"){
         e.target.parentElement.parentElement.remove();
+    }
+});
+
+// Switch functionality
+let items = document.querySelector("div#items");
+let itemsDel = document.querySelector("div#items-deleted");
+let theSwitch = document.querySelector("#switch");
+
+theSwitch.addEventListener("click", function(event) {
+    console.dir(event);
+    console.dir(itemsDel.style);
+    if(itemsDel.style.display == "none"){
+        items.style.display = "none";
+        itemsDel.style.display = "block";
+        theSwitch.innerText = "Tasks";
+        newItem.disabled = true;
+        console.log("Disabled");
+    }
+    else {
+        items.style.display = "block";
+        itemsDel.style.display = "none";
+        theSwitch.innerText = "Completed tasks";
+        newItem.disabled = false;
     }
 });
