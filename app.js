@@ -33,14 +33,18 @@ function mouseoverFn(event){
     }
 }
 function mouseoutFn(event){
+    console.dir(event);
     if(event.target.className == "item"){
         event.target.children[0].style.display = "none";
     }
-    else if((event.target.className == "del" && event.toElement.id == "items") || (event.target.className == "res" && event.toElement.id == "items-deleted")) {
+    else if((event.target.className == "del" && (event.toElement.id == "items" || (event.relatedTarget.nodeName != "SPAN" && event.relatedTarget != "LI"))) || (event.target.className == "res" && event.toElement.id == "items-deleted")) {
         event.target.style.display = "none";
     }
     else if(event.target.className == "del" || event.target.className == "res"){
         event.target.style.display = "inline";
+    }
+    else if(event.target.tagName == "BUTTON" && event.toElement.tagName == "H3"){
+        event.target.parentElement.style.display = "none";
     }
     else if(event.target.tagName == "BUTTON"){
         event.target.parentElement.style.display = "inline";
