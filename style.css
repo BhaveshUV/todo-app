@@ -59,6 +59,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0.4rem 0 0.4rem 1rem;
 }
 
 #items ul .item:hover{
@@ -86,9 +87,8 @@ body {
     color: white;
 }
 
-#items .item li {
+#items li {
     list-style: none;
-    padding: 0.4rem 1rem;
 }
 
 /* add-item section */
