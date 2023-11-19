@@ -141,3 +141,18 @@ h3 {
     flex-grow: 1;
     height: 1.25rem;
 }
+
+::-webkit-scrollbar {
+    appearance: none;
+    width: 0.5rem; 
+}
+  
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    background-color: rgba(13, 54, 104, 0.566);
+    border-radius: 0.5rem;
+}
+  
+::-webkit-scrollbar-track {
+    background: transparent;
+}
