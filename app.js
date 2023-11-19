@@ -1,23 +1,14 @@
 let btn = document.querySelector("#add");
+let newItem = document.querySelector("#new-item");
 function addItem() {
-    let newItem = document.querySelector("#new-item");
     if (newItem.value != 0) {
-        let div = document.createElement("div");
-        div.classList.add("item");
         let li = document.createElement("li");
-        li.innerText = newItem.value;
-        div.append(li);
+        li.classList.add("item");
+        li.innerHTML = `${newItem.value}<span class="del"><button>delete</button></span>`
 
-        let span = document.createElement("span");
-        span.classList.add("del");
-        let btn = document.createElement("button");
-        btn.innerText = "delete";
-        span.append(btn);
-        div.append(span);
-
-        document.querySelector("#items ul").append(div);
+        document.querySelector("#items ul").append(li);
         newItem.value = "";
-        console.log(div, "added");
+        console.log(li, "added");
     }
 }
 btn.addEventListener("click", addItem);
@@ -29,35 +20,96 @@ document.addEventListener("keypress", function (eve) {
 
 // mouseover and mouseout on delete button's common ancestor
 let list = document.querySelector("#items ul");
-list.addEventListener("mouseover", function(event){
+let listOfComp = document.querySelector("#items-deleted ul");
+function mouseoverFn(event){
     if(event.target.className == "item"){
-        event.target.children[1].style.display = "inline";
+        event.target.children[0].style.display = "inline";
     }
-    else if(event.target.className == "del"){
+    else if(event.target.className == "del" || event.target.className == "res"){
         event.target.style.display = "inline";
     }
     else if(event.target.tagName == "BUTTON"){
         event.target.parentElement.style.display = "inline";
     }
-});
-list.addEventListener("mouseout", function(event){
+}
+function mouseoutFn(event){
+    console.dir(event);
     if(event.target.className == "item"){
-        event.target.children[1].style.display = "none";
+        event.target.children[0].style.display = "none";
     }
-    else if(event.target.className == "del" && event.toElement.id == "items"){
+    else if((event.target.className == "del" && (event.toElement.id == "items" || (event.relatedTarget.nodeName != "SPAN" && event.relatedTarget != "LI"))) || (event.target.className == "res" && event.toElement.id == "items-deleted")) {
         event.target.style.display = "none";
     }
-    else if(event.target.className == "del"){
+    else if(event.target.className == "del" || event.target.className == "res"){
         event.target.style.display = "inline";
+    }
+    else if(event.target.tagName == "BUTTON" && event.toElement.tagName == "H3"){
+        event.target.parentElement.style.display = "none";
     }
     else if(event.target.tagName == "BUTTON"){
         event.target.parentElement.style.display = "inline";
+    }
+}
+list.addEventListener("mouseover", mouseoverFn);
+listOfComp.addEventListener("mouseover", mouseoverFn);
+list.addEventListener("mouseout", mouseoutFn);
+listOfComp.addEventListener("mouseout", mouseoutFn);
+
+// Delete button functionality
+function addItemInCompleted(task) {
+    let li = document.createElement("li");
+    li.classList.add("item");
+    li.innerHTML = `${task}<span class="res"><button>restore</button></span>`
+
+    document.querySelector("#items-deleted ul").append(li);
+    newItem.value = "";
+    console.log(li, "completed");
+}
+list.addEventListener("click", function(e) {
+    if(e.target.tagName == "BUTTON"){
+        let txt = e.target.parentElement.parentElement.innerText;
+        txt = txt.replaceAll(/\ndelete/g, "");
+        addItemInCompleted(txt);
+        e.target.parentElement.parentElement.remove();
     }
 });
 
-// Delete button functionality
-list.addEventListener("click", function(e) {
+// Switch functionality
+let items = document.querySelector("div#items");
+let itemsDel = document.querySelector("div#items-deleted");
+let theSwitch = document.querySelector("#switch");
+
+theSwitch.addEventListener("click", function(event) {
+    if(itemsDel.style.display == "none"){
+        items.style.display = "none";
+        itemsDel.style.display = "block";
+        theSwitch.innerText = "Tasks";
+        newItem.disabled = true;
+        console.log("Disabled");
+    }
+    else {
+        items.style.display = "block";
+        itemsDel.style.display = "none";
+        theSwitch.innerText = "Completed tasks";
+        newItem.disabled = false;
+    }
+});
+
+// Restore button functionality
+function restore(task) {
+    let li = document.createElement("li");
+    li.classList.add("item");
+    li.innerHTML = `${task}<span class="del"><button>delete</button></span>`
+
+    document.querySelector("#items ul").append(li);
+    newItem.value = "";
+    console.log(li, "restored");
+}
+listOfComp.addEventListener("click", function(e) {
     if(e.target.tagName == "BUTTON"){
+        let txt = e.target.parentElement.parentElement.innerText;
+        txt = txt.replaceAll(/\nrestore/g, "");
+        restore(txt);
         e.target.parentElement.parentElement.remove();
     }
 });

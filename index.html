@@ -11,27 +11,34 @@
         <h2 id="heading">Your to-do App!</h2>
 
         <div id="items">
+            <h3>Tasks</h3>
             <ul>
-                <div class="item">
-                    <li>Task1</li>
+                <li class="item">Task1
                     <span class="del">
                         <button>delete</button>
                     </span>
-                </div>
-                <div class="item">
-                    <li>Task2</li>
+                </li>
+
+                <li class="item">Task2
                     <span class="del">
                         <button>delete</button>
                     </span>
-                </div>
-                <div class="item">
-                    <li>Task3</li>
+                </li>
+
+                <li class="item">Task3
                     <span class="del">
                         <button>delete</button>
                     </span>
-                </div>
+                </li>
             </ul>
         </div>
+
+        <div id="items-deleted" style="display: none;">
+            <h3>Completed tasks</h3>
+            <ul></ul>
+        </div>
+
+        <h3 id="switch">Completed tasks</h3>
 
         <div id="add-item">
             <button id="add">Add</button>

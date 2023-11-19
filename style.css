@@ -33,62 +33,86 @@ body {
     background-color: rgba(255, 255, 255, 0.6);
 }
 
+h3 {
+    box-sizing: border-box;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+    padding: 0.2rem;
+    color: rgba(13, 54, 104, 0.8);
+    background-color: rgb(145, 165, 193);
+    cursor: default;
+}
+
+#switch {
+    background-color: rgba(255, 255, 255, 0.468);
+    cursor: pointer;
+}
+
 /* user's items section */
-#items {
-    padding: 0.3rem 0.7rem 0.3rem 0.7rem;
+#items, #items-deleted {
+    padding: 0 0.7rem 0.3rem 0.7rem;
     box-sizing: border-box;
     width: 100%;
     height: 238.4px;
-    background-color: rgba(255, 255, 255, 0.2);;   
+    background-color: rgb(145, 165, 193);;   
     overflow-y: auto;
+    position: relative;
 }
 
-#items ul {
+:is(#items, #items-deleted) h3 {
+    position: sticky;
+    top: 0;
+}
+
+#items ul, #items-deleted ul {
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
-    height: 100%;
 }
 
-#items ul .item {
+#items ul .item, #items-deleted ul .item{
     background-color: rgba(255, 255, 255, 0.2);
     color: white;
     border-radius: 0.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0.4rem 0 0.4rem 1rem;
 }
 
-#items ul .item:hover{
+:is(#items, #items-deleted) ul .item:hover{
     background-color: rgba(13, 54, 104, 0.259);
     color: rgb(13, 54, 104);
-
 }
 
-#items ul .item .del {
+#items ul .item .del, #items-deleted ul .item .res {
     padding-right: 0.5rem;
     display: none;
 }
 
 
-#items ul .item .del button {
+#items ul .item .del button, #items-deleted ul .item .res button {
     border: none;
     background-color: transparent;
     font: inherit;
     cursor: pointer;
 }
-#items ul .item .del button {
+#items ul .item .del button, #items-deleted ul .item .res button {
     line-height: 1;
     border-radius: 0.2rem;
     background-color: rgb(150, 18, 18);
     color: white;
 }
 
-#items .item li {
+#items-deleted ul .item .res button {
+    background-color: green;
+}
+
+#items li, #items-deleted li {
     list-style: none;
-    padding: 0.4rem 1rem;
 }
 
 /* add-item section */
@@ -116,4 +140,19 @@ body {
     font: inherit;
     flex-grow: 1;
     height: 1.25rem;
+}
+
+::-webkit-scrollbar {
+    appearance: none;
+    width: 0.5rem; 
+}
+  
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    background-color: rgba(13, 54, 104, 0.566);
+    border-radius: 0.5rem;
+}
+  
+::-webkit-scrollbar-track {
+    background: transparent;
 }
